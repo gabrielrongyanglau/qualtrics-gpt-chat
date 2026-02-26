@@ -1,0 +1,7 @@
+{
+  "name": "qualtrics-gpt-chat",
+  "version": "1.0.0",
+  "dependencies": {
+    "openai": "^4.52.0"
+  }
+}
