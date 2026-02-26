@@ -1,10 +1,10 @@
-import OpenAI from 'openai';
+const OpenAI = require('openai');
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   // Handle CORS preflight
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
@@ -18,7 +18,7 @@ export default async function handler(req, res) {
     const { messages, systemPrompt } = req.body;
 
     const completion = await openai.chat.completions.create({
-      model: 'gpt-4o',  // or whichever model you want
+      model: 'gpt-4o',
       messages: [
         { role: 'system', content: systemPrompt || 'You are a helpful assistant.' },
         ...messages,
@@ -33,4 +33,4 @@ export default async function handler(req, res) {
     console.error(error);
     return res.status(500).json({ error: 'API call failed' });
   }
-}
+};
